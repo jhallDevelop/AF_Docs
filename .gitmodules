@@ -1,0 +1,6 @@
+[submodule "libs/md4c"]
+	path = libs/md4c
+	url = https://github.com/mity/md4c.git
+[submodule "libs/AF_HTTP"]
+	path = libs/AF_HTTP
+	url = https://github.com/jhallDevelop/AF_HTTP.git
