@@ -9,7 +9,7 @@ uint32_t Read_MD(const char * _filePath, char** _bufferPtr);
 void process_html_output(const MD_CHAR* text, MD_SIZE size, void* userdata);
 
 const char* FILE_PATH = "./docs/test.md";
-const char* OUTPUT_PATH = "./docs/output.html";
+const char* OUTPUT_PATH = "./bin/index.html";
 
 // Structure to hold HTML output
 typedef struct {
@@ -55,14 +55,34 @@ int main(){
         free(html_output.data);
         return 1;
     }
-    
+
+    // combine the HTML header and footer
+    const char* html_header = "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<title>Converted Markdown</title>\n<link rel=\"stylesheet\" href=\"./markdown.css\" type=\"text/css\">\n</head>\n<body>\n";
+    const char* html_footer = "\n</body>\n</html>";
+    size_t header_len = strlen(html_header);
+    size_t footer_len = strlen(html_footer);
+    size_t total_size = header_len + html_output.size + footer_len;
+    char* full_html = (char*)malloc(total_size + 1);
+    if(full_html == NULL){
+        printf("Failed to allocate memory for full HTML output.\n");
+        free(mdContent);
+        free(html_output.data);
+        return 1;
+    }
+    // copy in the header, md and footer into the full_html buffer
+    full_html[total_size] = '\0'; // null terminate
+    memcpy(full_html, html_header, header_len);
+    memcpy(full_html + header_len, html_output.data, html_output.size);
+    memcpy(full_html + header_len + html_output.size, html_footer, footer_len);
+    free(html_output.data);
+
     printf("MD to HTML conversion succeeded.\n");
-    printf("HTML output (%zu bytes):\n%s\n", html_output.size, html_output.data);
+    printf("HTML output (%zu bytes):\n%s\n", total_size, full_html);
 
     // Write HTML to file
     FILE* outputFile = fopen(OUTPUT_PATH, "w");
     if(outputFile != NULL){
-        fwrite(html_output.data, 1, html_output.size, outputFile);
+        fwrite(full_html, 1, total_size, outputFile);
         fclose(outputFile);
         printf("Output written to %s\n", OUTPUT_PATH);
     } else {
