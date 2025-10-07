@@ -5,6 +5,9 @@ INCDIR = include
 LIBDIR = libs/md4c/src
 BUILDDIR = build
 BINDIR = bin
+PUBLICDIR = public
+DOCSDIR = docs
+HTTPDIR = libs/AF_HTTP
 
 SOURCES = main.c $(wildcard $(SRCDIR)/*.c) $(wildcard $(LIBDIR)/*.c)
 HEADERS = $(wildcard $(INCDIR)/*.h) $(wildcard $(LIBDIR)/*.h)
@@ -16,8 +19,19 @@ LIB_OBJS = $(patsubst $(LIBDIR)/%.c,$(BUILDDIR)/%.o,$(wildcard $(LIBDIR)/*.c))
 OBJECTS = $(MAIN_OBJ) $(SRC_OBJS) $(LIB_OBJS)
 
 TARGET = $(BINDIR)/AF_Docs
+HTTP_TARGET = $(BINDIR)/AF_HTTP
 
-all: $(TARGET)
+all: $(TARGET) $(HTTP_TARGET)
+
+$(TARGET): $(OBJECTS) | $(BINDIR)
+	$(CC) $(OBJECTS) -o $(TARGET)
+
+# Build AF_HTTP and copy to bin directory
+$(HTTP_TARGET): | $(BINDIR)
+	@echo "Building AF_HTTP..."
+	$(MAKE) -C $(HTTPDIR)
+	cp $(HTTPDIR)/bin/AF_HTTP $(HTTP_TARGET)
+	@echo "AF_HTTP copied to $(BINDIR)/"
 
 $(TARGET): $(OBJECTS) | $(BINDIR)
 	$(CC) $(OBJECTS) -o $(TARGET)
@@ -39,5 +53,6 @@ $(BINDIR):
 
 clean:
 	rm -rf $(BUILDDIR) $(BINDIR)
+	$(MAKE) -C $(HTTPDIR) clean
 
 .PHONY: all clean

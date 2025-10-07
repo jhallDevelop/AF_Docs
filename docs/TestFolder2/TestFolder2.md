@@ -1,7 +1,7 @@
-# Test Markdown Document
+# Test Markdown Document - Test Folder 2
 
 ## Overview
-This is a test markdown file to demonstrate basic markdown formatting.
+This is a test markdown file found in Test Folder 2 to demonstrate basic markdown formatting and nested documents.
 
 ## Features
 - **Bold text**
