@@ -8,7 +8,9 @@ A fast, lightweight static site generator that converts Markdown files to HTML u
 
 ## 📖 About The Project
 
-This repository contains **AF\_Docs** - a simple yet powerful static site generator written in C. Key features include recursive directory processing, GitHub Flavored Markdown support, and an integrated HTTP preview server. This project aims to deliver a minimal, dependency-free solution for converting markdown documentation into deployable HTML websites.
+This repository contains **AF\_Docs** - a simple static site generator written in C. This project aims to deliver a minimal, solution for converting markdown documentation into deployable HTML websites. The project uses the awesome **MD4C Library** by Martin Mitáš ([mity/md4c](https://github.com/mity/md4c)).
+
+The project was built for personal websites and project documentation.  
 
 ---
 
@@ -36,39 +38,6 @@ Follow these instructions to get a copy of the project up and running on your lo
     *   `bin/AF_HTTP` - The HTTP preview server
 
 **Run your first conversion:**
-
----
-
-## Features ✨
-
-This project includes the following main features:
-
-### Feature 1: **Recursive Markdown Processing**
-
-*   **Description:** Automatically discovers and converts all `.md` files in a directory tree to `.html` files.
-*   **Characteristics:**
-    *   Preserves the original directory structure in the output
-    *   Processes nested folders recursively
-    *   Matches markdown filenames to HTML output (e.g., `index.md` → `index.html`)
-    *   Skips non-markdown files automatically
-
-### Feature 2: **GitHub Flavored Markdown Support**
-
-*   **Description:** Full support for GitHub Flavored Markdown (GFM) features through the MD4C library.
-*   **Characteristics:**
-    *   Tables, strikethrough, and task lists
-    *   Autolinks and URL autolinking
-    *   Fenced code blocks with syntax highlighting support
-    *   Fast and lightweight C-based parsing
-
-### Feature 3: **Built-in HTTP Preview Server**
-
-*   **Description:** Integrated HTTP server (AF\_HTTP) for instant local preview of generated sites.
-*   **Characteristics:**
-    *   Serves static HTML, CSS, and JavaScript files
-    *   Automatic MIME type detection
-    *   Security features including path traversal protection
-    *   Lightweight with minimal dependencies
 
 ---
 
@@ -115,7 +84,7 @@ Then open your browser to `http://localhost:8080`
 
 ## FAQ ❓
 
-**"I get compilation errors when running** `**make**`**"**
+**"I get compilation errors when running** `_**make**_`**"**
 
 *   **Check GCC version:** Ensure you have a modern GCC compiler installed (`gcc --version`)
 *   **Missing headers:** Verify that standard C libraries are installed
@@ -126,12 +95,6 @@ Then open your browser to `http://localhost:8080`
 *   **Check file extensions:** Only `.md` files are processed
 *   **Verify path:** Ensure the input directory path is correct and contains markdown files
 *   **Permissions:** Check that the program has read access to the input directory
-
-**"AF\_HTTP shows 404 errors"**
-
-*   **Run from correct directory:** AF\_HTTP serves files from the current directory
-*   **Check file paths:** Ensure HTML files exist in the directory you're serving
-*   **CSS paths:** Verify that `markdown.css` is in the correct location relative to HTML files
 
 ---
 
