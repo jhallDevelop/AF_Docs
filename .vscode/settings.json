@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "stdlib.h": "c",
-        "af_docs.h": "c"
+        "af_docs.h": "c",
+        "ctype.h": "c",
+        "af_http.h": "c"
     }
 }
