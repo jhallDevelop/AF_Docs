@@ -47,14 +47,14 @@ all: $(TARGET) $(HTTP_TARGET)
 $(TARGET): $(OBJECTS) | $(BINDIR)
 	@echo "Linking AF_Docs..."
 	$(CC) $(OBJECTS) -o $(TARGET)
-	@echo "✓ AF_Docs built: $(TARGET)"
+	@echo "AF_Docs built: $(TARGET)"
 
 # Build AF_HTTP from submodule
 $(HTTP_TARGET): | $(BINDIR)
 	@echo "Building AF_HTTP..."
 	$(MAKE) -C $(HTTPDIR)
 	cp $(HTTPDIR)/bin/AF_HTTP $(HTTP_TARGET)
-	@echo "✓ AF_HTTP copied to $(BINDIR)/"
+	@echo "AF_HTTP copied to $(BINDIR)/"
 
 # Compile object files
 $(BUILDDIR)/main.o: main.c $(HEADERS) | $(BUILDDIR)
@@ -81,7 +81,7 @@ clean:
 	@echo "Cleaning..."
 	@rm -rf $(BUILDDIR) $(BINDIR)
 	@$(MAKE) -C $(HTTPDIR) clean
-	@echo "✓ Clean complete"
+	@echo "Clean complete"
 
 # Show help
 help:
